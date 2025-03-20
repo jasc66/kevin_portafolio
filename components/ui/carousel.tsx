@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+// @ts-ignore
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react"
