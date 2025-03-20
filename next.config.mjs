@@ -27,7 +27,6 @@ const nextConfig = {
   },
   compress: true,
   poweredByHeader: false,
-  swcMinify: true,
 };
 
 // Aplicamos el analizador de bundle solo si ANALYZE=true
