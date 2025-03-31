@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import type { EducationItem, CertificationItem } from "@/data/portfolio-data"
+import type { EducationItem } from "@/data/education"
+import type { CertificationItem } from "@/data/certifications"
 
 interface EducationCardProps {
   type: "education" | "certification"
@@ -52,8 +53,8 @@ export default function EducationCard({ type, items, bgColor, icon }: EducationC
     >
       {/* Background */}
       <div className={`absolute top-0 left-0 h-full w-full ${bgColor}`}></div>
-      {/* Dark overlay for better text contrast - increased opacity */}
-      <div className="absolute top-0 left-0 h-full w-full bg-black/40"></div>
+      {/* Dark overlay for better text contrast - INCREASED OPACITY */}
+      <div className="absolute top-0 left-0 h-full w-full bg-black/70"></div>
 
       {/* Icon */}
       <div className="absolute top-12 right-8 text-6xl opacity-20">{icon}</div>
@@ -65,18 +66,18 @@ export default function EducationCard({ type, items, bgColor, icon }: EducationC
         <div className="space-y-6">
           {type === "education"
             ? (items as EducationItem[]).map((item) => (
-                <div key={item.id} className="border-l-2 border-white/50 pl-4 hover:border-white/80 transition-colors">
+                <div key={item.id} className="border-l-2 border-white/70 pl-4 hover:border-white transition-colors">
                   <h4 className="font-medium text-lg text-white">{item.title}</h4>
-                  <p className="text-white/90">{item.institution}</p>
-                  {item.location && <p className="text-white/80 text-sm">{item.location}</p>}
-                  {item.period && <p className="text-white/80 text-sm">{item.period}</p>}
+                  <p className="text-white">{item.institution}</p>
+                  {item.location && <p className="text-white/90 text-sm">{item.location}</p>}
+                  {item.period && <p className="text-white/90 text-sm">{item.period}</p>}
                 </div>
               ))
             : (items as CertificationItem[]).map((item) => (
-                <div key={item.id} className="border-l-2 border-white/50 pl-4 hover:border-white/80 transition-colors">
+                <div key={item.id} className="border-l-2 border-white/70 pl-4 hover:border-white transition-colors">
                   <h4 className="font-medium text-lg text-white">{item.title}</h4>
-                  <p className="text-white/90">{item.issuer}</p>
-                  {item.details && <p className="text-white/80 text-sm">{item.details}</p>}
+                  <p className="text-white">{item.issuer}</p>
+                  {item.details && <p className="text-white/90 text-sm">{item.details}</p>}
                 </div>
               ))}
         </div>

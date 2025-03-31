@@ -14,15 +14,23 @@ import { LazyProjectsSection, LazyContactForm, LazyLoadComponent } from "@/compo
 import ExperienceCard from "@/components/experience-card"
 import EducationCard from "@/components/education-card"
 
-// Import data
-import {
-  experiences,
-  educationItems,
-  certificationItems,
-  technicalSkills,
-  CV_URL,
-  PROFILE_IMAGE,
-} from "@/data/portfolio-data"
+// Import data directly from individual files
+import { experiences } from "@/data/experience"
+import { educationItems } from "@/data/education"
+import { certificationItems } from "@/data/certifications"
+import { technicalSkills } from "@/data/skills"
+
+// Constants
+const CV_URL = "/Kevin_Ilama_Portuguez_CV.pdf"
+const PROFILE_IMAGE =
+  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/kevin.jpg-3FZmo8zITF2rYiuzWowplqrp7wcuHh.jpeg"
+const CONTACT_INFO = {
+  email: "ilamaportuguezkevin98@gmail.com",
+  phone: "87666776",
+  location: "San Jose, Pérez Zeledón, Costa Rica",
+  linkedin: "https://www.linkedin.com/in/kevin-ilama-portuguez-852239226/",
+  whatsapp: "https://wa.me/50687666776",
+}
 
 export default function Home() {
   return (
@@ -60,13 +68,13 @@ export default function Home() {
                   Kevin Ilama Portuguez
                 </h1>
                 <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-primary mb-6">Data Engineer</h2>
-                <p className="text-base md:text-lg text-slate-600 mb-8 max-w-2xl mx-auto md:mx-0">
+                <p className="text-base md:text-lg text-slate-800 mb-8 max-w-2xl mx-auto md:mx-0">
                   Dedicated and meticulous professional with experience across diverse fields such as customer service,
                   collecting requirements based on the client's specifications and deliver solutions. Technology
                   enthusiast in a continuous improvement development path.
                 </p>
                 <div className="flex flex-wrap gap-4 justify-center md:justify-start mb-6">
-                  <Button className="bg-primary hover:bg-primary/90" asChild>
+                  <Button variant="default" className="bg-primary hover:bg-primary/90" asChild>
                     <a href="#contact">Contact Me</a>
                   </Button>
                   <Button variant="outline" className="border-primary text-primary hover:bg-primary/10" asChild>
@@ -89,29 +97,29 @@ export default function Home() {
               About Me
             </h2>
             <div className="max-w-3xl mx-auto">
-              <p className="text-lg text-slate-700 mb-6">
+              <p className="text-lg text-slate-800 mb-6">
                 I'm a Data Engineer with expertise in designing and implementing data solutions that drive business
                 insights and decision-making. My experience spans across financial institutions and technical
                 consulting, where I've developed robust ETL processes, optimized database performance, and created
                 impactful reporting solutions.
               </p>
-              <p className="text-lg text-slate-700 mb-6">
+              <p className="text-lg text-slate-800 mb-6">
                 I specialize in SQL development, Power BI reporting, and data integration, with a strong focus on data
                 quality and performance optimization. My approach combines technical expertise with a deep understanding
                 of business needs to deliver solutions that make a real impact.
               </p>
               <div className="flex flex-wrap gap-4 mt-8 justify-center">
-                <div className="flex items-center gap-2 text-slate-700">
+                <div className="flex items-center gap-2 text-slate-800">
                   <MapPin size={18} className="text-primary" aria-hidden="true" />
-                  <span>San Jose, Pérez Zeledón, Costa Rica</span>
+                  <span>{CONTACT_INFO.location}</span>
                 </div>
-                <div className="flex items-center gap-2 text-slate-700">
+                <div className="flex items-center gap-2 text-slate-800">
                   <Mail size={18} className="text-primary" aria-hidden="true" />
-                  <span>ilamaportuguezkevin98@gmail.com</span>
+                  <span>{CONTACT_INFO.email}</span>
                 </div>
-                <div className="flex items-center gap-2 text-slate-700">
+                <div className="flex items-center gap-2 text-slate-800">
                   <Phone size={18} className="text-primary" aria-hidden="true" />
-                  <span>87666776</span>
+                  <span>{CONTACT_INFO.phone}</span>
                 </div>
               </div>
             </div>
@@ -151,12 +159,12 @@ export default function Home() {
             </h2>
             <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
               {technicalSkills.map((skillGroup, groupIndex) => (
-                <div key={groupIndex} className="space-y-6 bg-white/80 shadow-md p-6 rounded-lg">
+                <div key={groupIndex} className="space-y-6 bg-white/90 shadow-md p-6 rounded-lg">
                   {skillGroup.map((skill) => (
                     <div key={skill.id}>
                       <div className="flex justify-between mb-1">
-                        <span className="font-medium text-slate-800">{skill.name}</span>
-                        <span className="text-sm text-slate-600">{skill.percentage}%</span>
+                        <span className="font-medium text-slate-900">{skill.name}</span>
+                        <span className="text-sm text-slate-800">{skill.percentage}%</span>
                       </div>
                       <Progress
                         value={skill.percentage}
@@ -173,7 +181,7 @@ export default function Home() {
 
         {/* Education Section */}
         <section id="education" className="py-20 relative" aria-labelledby="education-heading">
-          <div className="absolute inset-0 bg-white/80"></div>
+          <div className="absolute inset-0 bg-white/90"></div>
           <div className="container mx-auto px-4 relative z-10">
             <h2 id="education-heading" className="text-3xl font-bold text-slate-900 mb-12 text-center">
               Education & Certifications
@@ -210,14 +218,14 @@ export default function Home() {
 
         {/* Contact Section */}
         <section id="contact" className="py-20 relative" aria-labelledby="contact-heading">
-          <div className="absolute inset-0 bg-white/80"></div>
+          <div className="absolute inset-0 bg-white/90"></div>
           <div className="container mx-auto px-4 relative z-10">
             <h2 id="contact-heading" className="text-3xl font-bold text-slate-900 mb-12 text-center">
               Get In Touch
             </h2>
             <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div className="relative rounded-lg shadow-lg overflow-hidden bg-primary/5 border border-primary/20">
-                <div className="absolute top-0 left-0 h-full w-12 bg-primary/10 flex items-center justify-center">
+              <div className="relative rounded-lg shadow-lg overflow-hidden bg-primary/10 border border-primary/20">
+                <div className="absolute top-0 left-0 h-full w-12 bg-primary/20 flex items-center justify-center">
                   <p className="text-primary font-semibold text-lg tracking-widest transform -rotate-90 whitespace-nowrap">
                     My Details
                   </p>
@@ -228,37 +236,40 @@ export default function Home() {
 
                   <div className="space-y-5">
                     <div className="border-b-2 border-primary/20 pb-4">
-                      <p className="text-sm font-medium text-slate-700 mb-1">Email</p>
+                      <p className="text-sm font-medium text-slate-800 mb-1">Email</p>
                       <div className="flex items-center gap-2">
                         <Mail size={16} className="text-primary" aria-hidden="true" />
                         <a
-                          href="mailto:ilamaportuguezkevin98@gmail.com"
-                          className="text-slate-800 hover:text-primary transition-colors"
+                          href={`mailto:${CONTACT_INFO.email}`}
+                          className="text-slate-900 hover:text-primary transition-colors"
                         >
-                          ilamaportuguezkevin98@gmail.com
+                          {CONTACT_INFO.email}
                         </a>
                       </div>
                     </div>
 
                     <div className="border-b-2 border-primary/20 pb-4">
-                      <p className="text-sm font-medium text-slate-700 mb-1">Phone</p>
+                      <p className="text-sm font-medium text-slate-800 mb-1">Phone</p>
                       <div className="flex items-center gap-2">
                         <Phone size={16} className="text-primary" aria-hidden="true" />
-                        <a href="tel:87666776" className="text-slate-800 hover:text-primary transition-colors">
-                          87666776
+                        <a
+                          href={`tel:${CONTACT_INFO.phone}`}
+                          className="text-slate-900 hover:text-primary transition-colors"
+                        >
+                          {CONTACT_INFO.phone}
                         </a>
                       </div>
                     </div>
 
                     <div className="border-b-2 border-primary/20 pb-4">
-                      <p className="text-sm font-medium text-slate-700 mb-1">WhatsApp</p>
+                      <p className="text-sm font-medium text-slate-800 mb-1">WhatsApp</p>
                       <div className="flex items-center gap-2">
                         <MessageSquare size={16} className="text-primary" aria-hidden="true" />
                         <a
-                          href="https://wa.me/50687666776"
+                          href={CONTACT_INFO.whatsapp}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-slate-800 hover:text-primary transition-colors"
+                          className="text-slate-900 hover:text-primary transition-colors"
                         >
                           Chat on WhatsApp
                         </a>
@@ -266,22 +277,22 @@ export default function Home() {
                     </div>
 
                     <div className="border-b-2 border-primary/20 pb-4">
-                      <p className="text-sm font-medium text-slate-700 mb-1">Location</p>
+                      <p className="text-sm font-medium text-slate-800 mb-1">Location</p>
                       <div className="flex items-center gap-2">
                         <MapPin size={16} className="text-primary" aria-hidden="true" />
-                        <p className="text-slate-800">San Jose, Pérez Zeledón, 11901</p>
+                        <p className="text-slate-900">{CONTACT_INFO.location}</p>
                       </div>
                     </div>
 
                     <div className="border-b-2 border-primary/20 pb-4">
-                      <p className="text-sm font-medium text-slate-700 mb-1">LinkedIn</p>
+                      <p className="text-sm font-medium text-slate-800 mb-1">LinkedIn</p>
                       <div className="flex items-center gap-2">
                         <Linkedin size={16} className="text-primary" aria-hidden="true" />
                         <a
-                          href="https://www.linkedin.com/in/kevin-ilama-portuguez-852239226/"
+                          href={CONTACT_INFO.linkedin}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-slate-800 hover:text-primary transition-colors"
+                          className="text-slate-900 hover:text-primary transition-colors"
                         >
                           Kevin Ilama
                         </a>
@@ -290,7 +301,7 @@ export default function Home() {
 
                     <div className="pt-2">
                       <a
-                        href="https://www.linkedin.com/in/kevin-ilama-portuguez-852239226/"
+                        href={CONTACT_INFO.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-primary text-primary rounded-md hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2"
@@ -310,30 +321,28 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className="py-8 bg-slate-900/90 backdrop-blur-md text-white" role="contentinfo">
+        <footer className="py-8 bg-slate-900 text-white" role="contentinfo">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="mb-4 md:mb-0">
-                <p className="text-slate-300">
-                  © {new Date().getFullYear()} Kevin Ilama Portuguez. All rights reserved.
-                </p>
+                <p className="text-white">© {new Date().getFullYear()} Kevin Ilama Portuguez. All rights reserved.</p>
               </div>
               <div className="flex space-x-4">
                 <a
-                  href="https://www.linkedin.com/in/kevin-ilama-portuguez-852239226/"
+                  href={CONTACT_INFO.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-300 hover:text-white transition"
+                  className="text-white hover:text-primary transition"
                   aria-label="LinkedIn Profile"
                 >
                   <Linkedin size={20} aria-hidden="true" />
                 </a>
-                <a href="#" className="text-slate-300 hover:text-white transition" aria-label="GitHub Profile">
+                <a href="#" className="text-white hover:text-primary transition" aria-label="GitHub Profile">
                   <Github size={20} aria-hidden="true" />
                 </a>
                 <a
-                  href="mailto:ilamaportuguezkevin98@gmail.com"
-                  className="text-slate-300 hover:text-white transition"
+                  href={`mailto:${CONTACT_INFO.email}`}
+                  className="text-white hover:text-primary transition"
                   aria-label="Email Me"
                 >
                   <Mail size={20} aria-hidden="true" />

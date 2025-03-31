@@ -36,8 +36,8 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="relative rounded-lg shadow-lg overflow-hidden bg-primary/5 border border-primary/20">
-      <div className="absolute top-0 right-0 h-full w-12 bg-primary/10 flex items-center justify-center">
+    <div className="relative rounded-lg shadow-lg overflow-hidden bg-primary/10 border border-primary/20">
+      <div className="absolute top-0 right-0 h-full w-12 bg-primary/20 flex items-center justify-center">
         <p className="text-primary font-semibold text-lg tracking-widest transform rotate-90 whitespace-nowrap">
           Contact Me
         </p>
@@ -58,7 +58,7 @@ export default function ContactForm() {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full py-2 pl-0 bg-transparent border-0 border-b-2 border-primary/50 focus:border-primary outline-none focus:ring-0 placeholder:text-slate-400 text-slate-800 placeholder:text-sm transition-colors"
+              className="w-full py-2 pl-0 bg-transparent border-0 border-b-2 border-primary/50 focus:border-primary outline-none focus:ring-0 placeholder:text-slate-500 text-slate-800 placeholder:text-sm transition-colors"
               placeholder="Enter your name"
               aria-required="true"
             />
@@ -75,7 +75,7 @@ export default function ContactForm() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full py-2 pl-0 bg-transparent border-0 border-b-2 border-primary/50 focus:border-primary outline-none focus:ring-0 placeholder:text-slate-400 text-slate-800 placeholder:text-sm transition-colors"
+              className="w-full py-2 pl-0 bg-transparent border-0 border-b-2 border-primary/50 focus:border-primary outline-none focus:ring-0 placeholder:text-slate-500 text-slate-800 placeholder:text-sm transition-colors"
               placeholder="Enter your email"
               aria-required="true"
             />
@@ -92,7 +92,7 @@ export default function ContactForm() {
               value={formData.subject}
               onChange={handleChange}
               required
-              className="w-full py-2 pl-0 bg-transparent border-0 border-b-2 border-primary/50 focus:border-primary outline-none focus:ring-0 placeholder:text-slate-400 text-slate-800 placeholder:text-sm transition-colors"
+              className="w-full py-2 pl-0 bg-transparent border-0 border-b-2 border-primary/50 focus:border-primary outline-none focus:ring-0 placeholder:text-slate-500 text-slate-800 placeholder:text-sm transition-colors"
               placeholder="Enter subject"
               aria-required="true"
             />
@@ -109,7 +109,7 @@ export default function ContactForm() {
               onChange={handleChange}
               required
               rows={4}
-              className="w-full py-2 pl-0 bg-transparent border-0 border-b-2 border-primary/50 focus:border-primary outline-none focus:ring-0 placeholder:text-slate-400 text-slate-800 placeholder:text-sm transition-colors resize-none"
+              className="w-full py-2 pl-0 bg-transparent border-0 border-b-2 border-primary/50 focus:border-primary outline-none focus:ring-0 placeholder:text-slate-500 text-slate-800 placeholder:text-sm transition-colors resize-none"
               placeholder="Your message"
               aria-required="true"
             ></textarea>
