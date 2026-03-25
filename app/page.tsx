@@ -150,40 +150,23 @@ export default function Home() {
         </section>
 
         {/* Skills Section */}
-        {/* ===== ACCESSIBILITY_TEST_ERRORS_START =====
-            ERRORES INTRODUCIDOS INTENCIONALMENTE PARA PRUEBA DE AUDITORÍA:
-            1. <section> sin aria-labelledby (criterio 1.3.1 / 2.4.6)
-            2. <h2> sin id (rompe la asociación con la sección)
-            3. Texto con color muy bajo contraste: text-slate-300 sobre bg-white/90 (criterio 1.4.3)
-            4. <div role="img"> sin aria-label ni alt (criterio 1.1.1)
-            5. <button> sin texto accesible ni aria-label (criterio 4.1.2)
-            ===== ACCESSIBILITY_TEST_ERRORS_START ===== */}
-        <section id="skills" className="py-20 relative">
-          {/* ERROR #1: se eliminó aria-labelledby="skills-heading" del <section> */}
+        <section id="skills" className="py-20 relative" aria-labelledby="skills-heading">
           <div className="absolute inset-0 bg-slate-100/70"></div>
           <div className="container mx-auto px-4 relative z-10">
-            <h2 className="text-3xl font-bold text-slate-900 mb-12 text-center">
-              {/* ERROR #2: se eliminó id="skills-heading" del <h2> */}
+            <h2 id="skills-heading" className="text-3xl font-bold text-slate-900 mb-12 text-center">
               Technical Skills
             </h2>
             <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
               {technicalSkills.map((skillGroup, groupIndex) => (
                 <div key={groupIndex} className="space-y-6 bg-white/90 shadow-md p-6 rounded-lg">
-                  {/* ERROR #3: texto con contraste insuficiente (slate-300 sobre fondo blanco) */}
-                  <p className="text-slate-300 text-xs mb-2">Skill proficiency levels</p>
                   {skillGroup.map((skill) => (
                     <SkillBar key={skill.id} name={skill.name} percentage={skill.percentage} />
                   ))}
-                  {/* ERROR #4: div con role="img" sin aria-label */}
-                  <div role="img" className="w-4 h-4 bg-primary rounded-full"></div>
-                  {/* ERROR #5: botón sin texto accesible ni aria-label */}
-                  <button className="text-transparent bg-primary w-6 h-6 rounded"></button>
                 </div>
               ))}
             </div>
           </div>
         </section>
-        {/* ===== ACCESSIBILITY_TEST_ERRORS_END ===== */}
 
         {/* Education Section */}
         <section id="education" className="py-20 relative" aria-labelledby="education-heading">
