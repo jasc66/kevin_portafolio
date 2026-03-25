@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { Badge } from "@/components/ui/badge"
 
 interface ExperienceCardProps {
   title: string
@@ -77,7 +76,9 @@ export default function ExperienceCard({
             <h3 className="text-xl font-bold text-white">{title}</h3>
             <p className="text-lg text-white">{company}</p>
           </div>
-          <Badge className="bg-slate-700 hover:bg-slate-600 text-white border-0">{period}</Badge>
+          <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-slate-700 text-white">
+            {period}
+          </span>
         </div>
 
         <p className="text-sm text-white mb-4 border-l-2 border-white/50 pl-3">Focus: {focus}</p>
