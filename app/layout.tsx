@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import Script from "next/script"
+import { Suspense } from "react"
 import { ThemeProvider } from "@/components/theme-provider-simple"
 import { SITE_CONFIG } from "@/constants/site-config"
 import PageViewTracker from "@/components/analytics/page-view-tracker"
@@ -78,7 +79,9 @@ export default function RootLayout({
         </ThemeProvider>
 
         {/* Analytics tracking */}
-        <PageViewTracker />
+        <Suspense fallback={null}>
+          <PageViewTracker />
+        </Suspense>
 
         {/* Load non-critical scripts with defer */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" strategy="lazyOnload" />
