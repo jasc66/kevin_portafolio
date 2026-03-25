@@ -4,6 +4,8 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import Script from "next/script"
 import { ThemeProvider } from "@/components/theme-provider-simple"
+import { SITE_CONFIG } from "@/constants/site-config"
+import PageViewTracker from "@/components/analytics/page-view-tracker"
 
 // Optimize font loading with display swap
 const inter = Inter({
@@ -11,31 +13,46 @@ const inter = Inter({
   display: "swap",
   preload: true,
   variable: "--font-inter",
+  fallback: ["system-ui", "sans-serif"],
 })
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kevinilama.com"),
-  title: "Kevin Ilama Portuguez | Data Engineer",
-  description:
-    "Professional portfolio of Kevin Ilama Portuguez, Data Engineer specializing in SQL, Power BI, and data integration solutions.",
-  keywords: "Kevin Ilama Portuguez, Data Engineer, SQL, Power BI, ETL, Data Integration, Portfolio",
-  authors: [{ name: "Kevin Ilama Portuguez" }],
+  title: {
+    default: `${SITE_CONFIG.name} | ${SITE_CONFIG.title}`,
+    template: "%s | Kevin Ilama Portuguez",
+  },
+  description: SITE_CONFIG.description,
+  keywords: ["Kevin Ilama Portuguez", "Data Engineer", "SQL", "Power BI", "ETL", "Data Integration", "Portfolio"],
+  authors: [{ name: SITE_CONFIG.name }],
   openGraph: {
-    title: "Kevin Ilama Portuguez | Data Engineer",
-    description:
-      "Professional portfolio of Kevin Ilama Portuguez, Data Engineer specializing in SQL, Power BI, and data integration solutions.",
+    title: `${SITE_CONFIG.name} | ${SITE_CONFIG.title}`,
+    description: SITE_CONFIG.description,
     url: "https://kevinilama.com",
-    siteName: "Kevin Ilama Portuguez Portfolio",
+    siteName: `${SITE_CONFIG.name} Portfolio`,
     images: [
       {
-        url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/kevin.jpg-3FZmo8zITF2rYiuzWowplqrp7wcuHh.jpeg",
+        url: SITE_CONFIG.images.profile,
         width: 1200,
         height: 630,
-        alt: "Kevin Ilama Portuguez - Data Engineer",
+        alt: `${SITE_CONFIG.name} - ${SITE_CONFIG.title}`,
       },
     ],
     locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_CONFIG.name} | ${SITE_CONFIG.title}`,
+    description: SITE_CONFIG.description,
+    images: [
+      {
+        url: SITE_CONFIG.images.profile,
+        width: 1200,
+        height: 630,
+        alt: `${SITE_CONFIG.name} - ${SITE_CONFIG.title}`,
+      },
+    ],
   },
 }
 
@@ -46,7 +63,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`scroll-smooth ${inter.variable}`}>
-      <head>{/* Removed PreloadAssets component */}</head>
+      <head>{/* Eliminamos el preload que estaba causando la advertencia */}</head>
       <body className={inter.className}>
         {/* Skip to content link for accessibility */}
         <a
@@ -60,14 +77,23 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
 
+        {/* Analytics tracking */}
+        <PageViewTracker />
+
         {/* Load non-critical scripts with defer */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" strategy="lazyOnload" />
         <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            window.gtag = gtag;
             gtag('js', new Date());
-            gtag('config', 'G-XXXXXXXXXX');
+            gtag('config', 'G-XXXXXXXXXX', {
+              page_path: window.location.pathname,
+              send_page_view: false
+            });
           `}
         </Script>
       </body>

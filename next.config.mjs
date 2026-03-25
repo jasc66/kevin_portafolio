@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 
-// Importamos el analizador de bundle solo si se necesita
-const withBundleAnalyzer =
-  process.env.ANALYZE === "true"
-    ? require("@next/bundle-analyzer")({ enabled: true })
-    : (config) => config;
+import bundleAnalyzer from "@next/bundle-analyzer"
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+})
 
 const nextConfig = {
   reactStrictMode: true,
@@ -27,9 +27,6 @@ const nextConfig = {
   },
   compress: true,
   poweredByHeader: false,
-};
+}
 
-// Aplicamos el analizador de bundle solo si ANALYZE=true
-export default process.env.ANALYZE === "true"
-  ? withBundleAnalyzer(nextConfig)
-  : nextConfig;
+export default withBundleAnalyzer(nextConfig)

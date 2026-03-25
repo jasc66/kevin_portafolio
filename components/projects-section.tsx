@@ -1,10 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useState, memo } from "react"
 import ProjectCard from "./project-card"
 import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
 import { initialProjects, additionalProjects } from "@/data/projects"
+
+// Memoize the ProjectCard component to prevent unnecessary re-renders
+const MemoizedProjectCard = memo(ProjectCard)
 
 export default function ProjectsSection() {
   const [showAll, setShowAll] = useState(false)
@@ -14,7 +17,7 @@ export default function ProjectsSection() {
     <div className="max-w-6xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project) => (
-          <ProjectCard
+          <MemoizedProjectCard
             key={project.id}
             title={project.title}
             subtitle={project.subtitle}

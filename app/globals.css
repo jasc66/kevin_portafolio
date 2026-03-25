@@ -13,7 +13,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 210 100% 45%;
+    --primary: 210 100% 40%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -45,7 +45,7 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 100% 45%;
+    --primary: 210 100% 40%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -165,5 +165,88 @@
 @font-face {
   font-family: "Inter";
   font-display: swap;
+}
+
+/* High contrast text helpers */
+.text-high-contrast {
+  @apply text-slate-900;
+}
+
+.text-medium-contrast {
+  @apply text-slate-700;
+}
+
+.text-white-high-contrast {
+  @apply text-white;
+}
+
+/* Improved background overlays for better contrast */
+.bg-overlay-dark {
+  @apply bg-black/60;
+}
+
+.bg-overlay-light {
+  @apply bg-white/90;
+}
+
+/* Modo de impresión optimizado */
+@media print {
+  header,
+  footer,
+  nav,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+  }
+  section {
+    page-break-inside: avoid;
+    background: white !important;
+    color: black !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: black !important;
+  }
+  p,
+  span,
+  div {
+    color: black !important;
+  }
+  a {
+    text-decoration: underline;
+    color: black !important;
+  }
+  .bg-overlay-dark,
+  .bg-overlay-light {
+    display: none !important;
+  }
+  .absolute {
+    position: relative !important;
+  }
+  .fixed {
+    position: relative !important;
+  }
+}
+
+/* Mejoras para Web Vitals */
+.content-visibility-auto {
+  content-visibility: auto;
+}
+
+/* Mejoras para accesibilidad */
+.focus-visible:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 

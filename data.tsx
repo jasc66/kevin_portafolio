@@ -8,4 +8,3 @@ export { technicalSkills } from "./data/skills"
 export { initialProjects, additionalProjects } from "./data/projects"
 export { CV_URL } from "./data/constants"
 export { PROFILE_IMAGE } from "./data/constants"
-
