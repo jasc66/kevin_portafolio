@@ -54,7 +54,7 @@ export default function ExperienceCard({
   return (
     <div
       ref={cardRef}
-      className={`card shadow-lg rounded-xl relative overflow-hidden transition-all duration-300 hover:shadow-xl`}
+      className={`card shadow-lg rounded-xl relative overflow-hidden transition-all duration-300 hover:shadow-xl bg-slate-900`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
@@ -64,31 +64,29 @@ export default function ExperienceCard({
         willChange: "transform, opacity",
       }}
     >
-      {/* Background */}
-      <div className={`absolute top-0 left-0 h-full w-full ${bgColor}`}></div>
-      {/* Dark overlay for better text contrast - increased opacity */}
-      <div className="absolute top-0 left-0 h-full w-full bg-black/40"></div>
+      {/* Background gradient overlay */}
+      <div className={`absolute top-0 left-0 h-full w-full ${bgColor} opacity-60`} aria-hidden="true"></div>
 
       {/* Icon */}
-      <div className="absolute top-12 right-8 text-6xl opacity-20">{icon}</div>
+      <div className="absolute top-12 right-8 text-6xl opacity-20" aria-hidden="true">{icon}</div>
 
       {/* Content */}
       <div className="relative z-10 p-6">
         <div className="flex justify-between items-start flex-wrap gap-4 mb-4">
           <div>
             <h3 className="text-xl font-bold text-white">{title}</h3>
-            <p className="text-lg text-white/90">{company}</p>
+            <p className="text-lg text-white">{company}</p>
           </div>
-          <Badge className="bg-white/20 hover:bg-white/30 text-white">{period}</Badge>
+          <Badge className="bg-slate-700 hover:bg-slate-600 text-white border-0">{period}</Badge>
         </div>
 
-        <p className="text-sm text-white/90 mb-4 border-l-2 border-white/50 pl-3">Focus: {focus}</p>
+        <p className="text-sm text-white mb-4 border-l-2 border-white/50 pl-3">Focus: {focus}</p>
 
         <ul className="space-y-3 list-none">
           {responsibilities.map((item, index) => (
             <li
               key={index}
-              className="text-white pl-3 border-l-2 border-white/30 hover:border-white/80 transition-colors"
+              className="text-white pl-3 border-l-2 border-slate-400 hover:border-white transition-colors"
             >
               <span className="font-medium text-white">{item.title}:</span> {item.description}
             </li>
