@@ -41,7 +41,7 @@ export default function EducationCard({ type, items, bgColor, icon }: EducationC
   return (
     <div
       ref={cardRef}
-      className={`card shadow-lg rounded-xl relative overflow-hidden transition-all duration-300 hover:shadow-xl`}
+      className={`card shadow-lg rounded-xl relative overflow-hidden transition-all duration-300 hover:shadow-xl bg-slate-900`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
@@ -51,13 +51,11 @@ export default function EducationCard({ type, items, bgColor, icon }: EducationC
         willChange: "transform, opacity",
       }}
     >
-      {/* Background */}
-      <div className={`absolute top-0 left-0 h-full w-full ${bgColor}`}></div>
-      {/* Dark overlay for better text contrast - INCREASED OPACITY */}
-      <div className="absolute top-0 left-0 h-full w-full bg-black/70"></div>
+      {/* Background gradient overlay */}
+      <div className={`absolute top-0 left-0 h-full w-full ${bgColor} opacity-50`} aria-hidden="true"></div>
 
       {/* Icon */}
-      <div className="absolute top-12 right-8 text-6xl opacity-20">{icon}</div>
+      <div className="absolute top-12 right-8 text-6xl opacity-20" aria-hidden="true">{icon}</div>
 
       {/* Content */}
       <div className="relative z-10 p-6">
@@ -66,18 +64,18 @@ export default function EducationCard({ type, items, bgColor, icon }: EducationC
         <div className="space-y-6">
           {type === "education"
             ? (items as EducationItem[]).map((item) => (
-                <div key={item.id} className="border-l-2 border-white/70 pl-4 hover:border-white transition-colors">
+                <div key={item.id} className="border-l-2 border-slate-400 pl-4 hover:border-white transition-colors">
                   <h4 className="font-medium text-lg text-white">{item.title}</h4>
                   <p className="text-white">{item.institution}</p>
-                  {item.location && <p className="text-white/90 text-sm">{item.location}</p>}
-                  {item.period && <p className="text-white/90 text-sm">{item.period}</p>}
+                  {item.location && <p className="text-white text-sm">{item.location}</p>}
+                  {item.period && <p className="text-white text-sm">{item.period}</p>}
                 </div>
               ))
             : (items as CertificationItem[]).map((item) => (
-                <div key={item.id} className="border-l-2 border-white/70 pl-4 hover:border-white transition-colors">
+                <div key={item.id} className="border-l-2 border-slate-400 pl-4 hover:border-white transition-colors">
                   <h4 className="font-medium text-lg text-white">{item.title}</h4>
                   <p className="text-white">{item.issuer}</p>
-                  {item.details && <p className="text-white/90 text-sm">{item.details}</p>}
+                  {item.details && <p className="text-white text-sm">{item.details}</p>}
                 </div>
               ))}
         </div>

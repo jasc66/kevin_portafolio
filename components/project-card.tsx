@@ -56,7 +56,7 @@ const ProjectCard = memo(function ProjectCard({
   return (
     <div
       ref={cardRef}
-      className={`card shadow-lg h-[400px] w-full group gap-[0.5em] rounded-xl relative flex justify-end flex-col p-6 z-[1] overflow-hidden transition-all duration-300 hover:shadow-xl`}
+      className={`card shadow-lg h-[400px] w-full group gap-[0.5em] rounded-xl relative flex justify-end flex-col p-6 z-[1] overflow-hidden transition-all duration-300 hover:shadow-xl bg-slate-900`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
@@ -65,13 +65,13 @@ const ProjectCard = memo(function ProjectCard({
         transition: "opacity 0.5s ease-out, transform 0.5s ease-out, box-shadow 0.3s ease",
       }}
     >
-      {/* Background */}
-      <div className={`absolute top-0 left-0 h-full w-full ${bgColor}`}></div>
-      {/* Dark overlay for better text contrast */}
-      <div className="absolute top-0 left-0 h-full w-full bg-black/50"></div>
+      {/* Background gradient overlay */}
+      <div className={`absolute top-0 left-0 h-full w-full ${bgColor} opacity-60`} aria-hidden="true"></div>
+      {/* Dark overlay */}
+      <div className="absolute top-0 left-0 h-full w-full bg-black/40" aria-hidden="true"></div>
 
       {/* Icon */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-8xl opacity-20 group-hover:opacity-10 transition-opacity duration-300">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-8xl opacity-20 group-hover:opacity-10 transition-opacity duration-300" aria-hidden="true">
         {icon}
       </div>
 
@@ -79,7 +79,7 @@ const ProjectCard = memo(function ProjectCard({
       <div className="container text-white z-[2] relative flex flex-col gap-3">
         <div className="h-fit w-full">
           <h3 className="text-2xl tracking-wider font-bold text-white">{title}</h3>
-          <p className="text-lg text-white/90">{subtitle}</p>
+          <p className="text-lg text-white">{subtitle}</p>
         </div>
 
         {/* Rating */}
@@ -111,7 +111,7 @@ const ProjectCard = memo(function ProjectCard({
           marginTop: isHovered ? "0.75rem" : "0",
         }}
       >
-        <p className="text-white/90 font-light">{description}</p>
+        <p className="text-white font-light">{description}</p>
       </div>
     </div>
   )
