@@ -277,40 +277,41 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="py-8 bg-slate-900 text-white" role="contentinfo">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="mb-4 md:mb-0">
-                <p className="text-white">
-                  © {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.
-                </p>
-              </div>
-              <div className="flex space-x-4">
-                <a
-                  href={SITE_CONFIG.contact.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-primary transition"
-                  aria-label="LinkedIn Profile"
-                >
-                  <Linkedin size={20} aria-hidden="true" />
-                </a>
-                <a href="#" className="text-white hover:text-primary transition" aria-label="GitHub Profile">
-                  <Github size={20} aria-hidden="true" />
-                </a>
-                <a
-                  href={`mailto:${SITE_CONFIG.contact.email}`}
-                  className="text-white hover:text-primary transition"
-                  aria-label="Email Me"
-                >
-                  <Mail size={20} aria-hidden="true" />
-                </a>
-              </div>
+      </main>
+
+      {/* Footer fuera de main para cumplir WCAG 1.3.1 (contentinfo no debe estar dentro de otro landmark) */}
+      <footer className="py-8 bg-slate-900 text-white" role="contentinfo">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-4 md:mb-0">
+              <p className="text-white">
+                © {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.
+              </p>
+            </div>
+            <div className="flex space-x-4">
+              <a
+                href={SITE_CONFIG.contact.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-primary transition p-1 min-w-[24px] min-h-[24px] inline-flex items-center justify-center"
+                aria-label="LinkedIn Profile"
+              >
+                <Linkedin size={20} aria-hidden="true" />
+              </a>
+              <a href="#" className="text-white hover:text-primary transition p-1 min-w-[24px] min-h-[24px] inline-flex items-center justify-center" aria-label="GitHub Profile">
+                <Github size={20} aria-hidden="true" />
+              </a>
+              <a
+                href={`mailto:${SITE_CONFIG.contact.email}`}
+                className="text-white hover:text-primary transition p-1 min-w-[24px] min-h-[24px] inline-flex items-center justify-center"
+                aria-label="Email Me"
+              >
+                <Mail size={20} aria-hidden="true" />
+              </a>
             </div>
           </div>
-        </footer>
-      </main>
+        </div>
+      </footer>
     </div>
   )
 }
