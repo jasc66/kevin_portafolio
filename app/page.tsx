@@ -49,7 +49,7 @@ export default function Home() {
       {/* Content that scrolls over the background */}
       <main id="main-content" className="pt-20 relative z-10">
         {/* Hero Section */}
-        <section className="relative overflow-hidden" aria-labelledby="hero-heading">
+        <section className="relative overflow-x-hidden" aria-labelledby="hero-heading">
           {/* Animated gradient blobs */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -319,32 +319,36 @@ export default function Home() {
             <h2 id="contact-heading" className="text-3xl font-bold text-slate-900 mb-12 text-center">
               Get In Touch
             </h2>
-            <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div className="relative rounded-lg shadow-lg overflow-hidden bg-primary/10 border border-primary/20">
-                <div className="absolute top-0 left-0 h-full w-12 bg-primary/20 flex items-center justify-center">
-                  <p className="text-primary font-semibold text-lg tracking-widest transform -rotate-90 whitespace-nowrap">
-                    My Details
-                  </p>
+            <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Contact Info Card */}
+              <div className="rounded-2xl shadow-xl overflow-hidden bg-white border border-slate-100">
+                {/* Card header with gradient */}
+                <div className="bg-gradient-to-r from-primary to-blue-500 px-6 py-5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-white/20 flex items-center justify-center">
+                      <Mail size={18} className="text-white" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white">Contact Information</h3>
+                      <p className="text-white/70 text-xs">Reach out through any channel</p>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="p-8 pl-16">
-                  <h3 className="text-xl font-medium text-slate-900 mb-6">Contact Information</h3>
-
-                  <div className="space-y-5">
+                <div className="p-6">
+                  <div className="space-y-1">
                     <ContactItem
                       icon={Mail}
                       label="Email"
                       value={SITE_CONFIG.contact.email}
                       href={`mailto:${SITE_CONFIG.contact.email}`}
                     />
-
                     <ContactItem
                       icon={Phone}
                       label="Phone"
                       value={SITE_CONFIG.contact.phone}
                       href={`tel:${SITE_CONFIG.contact.phone}`}
                     />
-
                     <ContactItem
                       icon={MessageSquare}
                       label="WhatsApp"
@@ -352,9 +356,7 @@ export default function Home() {
                       href={SITE_CONFIG.contact.whatsapp}
                       isExternal={true}
                     />
-
                     <ContactItem icon={MapPin} label="Location" value={SITE_CONFIG.contact.location} />
-
                     <ContactItem
                       icon={Linkedin}
                       label="LinkedIn"
@@ -362,18 +364,18 @@ export default function Home() {
                       href={SITE_CONFIG.contact.linkedin}
                       isExternal={true}
                     />
+                  </div>
 
-                    <div className="pt-2">
-                      <a
-                        href={SITE_CONFIG.contact.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-primary text-primary rounded-md hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2"
-                      >
-                        <span>View Profile</span>
-                        <Linkedin size={16} aria-hidden="true" />
-                      </a>
-                    </div>
+                  <div className="mt-6 pt-5 border-t border-slate-100">
+                    <a
+                      href={SITE_CONFIG.contact.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 w-full justify-center px-5 py-2.5 bg-primary text-white text-sm font-medium rounded-xl hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2"
+                    >
+                      <Linkedin size={15} aria-hidden="true" />
+                      <span>View LinkedIn Profile</span>
+                    </a>
                   </div>
                 </div>
               </div>
