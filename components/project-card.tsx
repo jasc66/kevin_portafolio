@@ -1,7 +1,8 @@
 "use client"
 
-import { useState, useEffect, useRef, memo } from "react"
+import { memo, useRef, useState } from "react"
 import { Star } from "lucide-react"
+import { motion, useInView } from "motion/react"
 
 interface ProjectCardProps {
   title: string
@@ -13,7 +14,6 @@ interface ProjectCardProps {
   icon: string
 }
 
-// Use memo to prevent unnecessary re-renders
 const ProjectCard = memo(function ProjectCard({
   title,
   subtitle,
@@ -23,99 +23,75 @@ const ProjectCard = memo(function ProjectCard({
   bgColor,
   icon,
 }: ProjectCardProps) {
-  const [isHovered, setIsHovered] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
+  const isVisible = useInView(cardRef, { once: true, margin: "100px" })
+  const [isHovered, setIsHovered] = useState(false)
 
-  useEffect(() => {
-    // Use IntersectionObserver for better performance
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setIsVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.1, rootMargin: "100px" },
-    )
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current)
-    }
-
-    return () => {
-      observer.disconnect()
-    }
-  }, [])
-
-  // Memoize the stars to avoid recreating them on each render
   const stars = Array(5)
     .fill(0)
-    .map((_, i) => <Star key={i} size={16} className="text-white" fill={i < rating ? "white" : "none"} />)
+    .map((_, i) => (
+      <Star key={i} size={15} className="text-yellow-300" fill={i < rating ? "currentColor" : "none"} />
+    ))
 
   return (
-    <div
+    <motion.div
       ref={cardRef}
-      className={`card shadow-lg h-[400px] w-full group gap-[0.5em] rounded-xl relative flex justify-end flex-col p-6 z-[1] overflow-hidden transition-all duration-300 hover:shadow-xl bg-slate-900`}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="card shadow-lg h-[400px] w-full group rounded-xl relative flex justify-end flex-col p-6 z-[1] overflow-hidden bg-slate-900"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0)" : "translateY(20px)",
-        transition: "opacity 0.5s ease-out, transform 0.5s ease-out, box-shadow 0.3s ease",
-      }}
     >
-      {/* Background gradient overlay */}
-      <div className={`absolute top-0 left-0 h-full w-full ${bgColor} opacity-60`} aria-hidden="true"></div>
-      {/* Dark overlay */}
-      <div className="absolute top-0 left-0 h-full w-full bg-black/40" aria-hidden="true"></div>
+      {/* Background gradient */}
+      <div className={`absolute top-0 left-0 h-full w-full ${bgColor} opacity-55 transition-opacity duration-500 group-hover:opacity-70`} aria-hidden="true" />
+      {/* Dark overlay gradient - stronger at bottom for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" aria-hidden="true" />
 
-      {/* Icon */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-8xl opacity-20 group-hover:opacity-10 transition-opacity duration-300" aria-hidden="true">
+      {/* Icon watermark */}
+      <div
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-8xl opacity-15 group-hover:opacity-20 group-hover:scale-110 transition-all duration-500 select-none pointer-events-none"
+        aria-hidden="true"
+      >
         {icon}
       </div>
 
-      {/* Content Container */}
-      <div className="container text-white z-[2] relative flex flex-col gap-3">
-        <div className="h-fit w-full">
-          <h3 className="text-2xl tracking-wider font-bold text-white">{title}</h3>
-          <p className="text-lg text-white">{subtitle}</p>
+      {/* Content */}
+      <div className="relative z-[2] flex flex-col gap-3">
+        <div>
+          <h3 className="text-xl font-bold text-white tracking-tight leading-tight">{title}</h3>
+          <p className="text-sm text-white/80 mt-0.5">{subtitle}</p>
         </div>
 
         {/* Rating */}
-        <div className="flex justify-left items-center h-fit w-full gap-4">
-          <div className="w-fit h-fit flex justify-left gap-1">{stars}</div>
-          <div className="w-fit h-fit text-white text-sm font-light">
-            <p>{rating}/5</p>
-          </div>
+        <div className="flex items-center gap-2">
+          <div className="flex gap-0.5" aria-label={`Rating: ${rating} out of 5 stars`}>{stars}</div>
+          <span className="text-xs text-white/60">{rating}/5</span>
         </div>
 
         {/* Tags */}
-        <div className="flex flex-wrap justify-start items-center h-fit w-fit gap-2">
+        <div className="flex flex-wrap gap-1.5">
           {tags.map((tag, index) => (
-            <div
+            <span
               key={index}
-              className="border border-white rounded-md text-white text-xs font-normal px-2 py-1 hover:bg-white hover:text-gray-900 transition-colors duration-300 cursor-pointer"
+              className="px-2 py-0.5 rounded-md text-white text-xs font-medium border border-white/30 bg-white/5 hover:bg-white/15 hover:border-white/60 transition-colors duration-200 cursor-default"
             >
-              <p>{tag}</p>
-            </div>
+              {tag}
+            </span>
           ))}
         </div>
-      </div>
 
-      {/* Description - appears on hover */}
-      <div
-        className="relative overflow-hidden transition-all duration-500"
-        style={{
-          height: isHovered ? "6rem" : "0",
-          marginTop: isHovered ? "0.75rem" : "0",
-        }}
-      >
-        <p className="text-white font-light">{description}</p>
+        {/* Description - appears on card hover */}
+        <motion.div
+          className="overflow-hidden"
+          animate={{ height: isHovered ? "auto" : 0, opacity: isHovered ? 1 : 0 }}
+          transition={{ duration: 0.35, ease: "easeInOut" }}
+        >
+          <p className="text-sm text-white/80 font-light leading-relaxed pt-1">{description}</p>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   )
 })
 
 export default ProjectCard
-

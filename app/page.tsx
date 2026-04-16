@@ -1,6 +1,6 @@
 "use client"
-import { Suspense } from "react"
-import { Github, Linkedin, Mail, MapPin, Phone, MessageSquare } from "lucide-react"
+import { Suspense, useEffect, useState } from "react"
+import { Github, Linkedin, Mail, MapPin, Phone, MessageSquare, ArrowRight, Database, BarChart3, Code2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import ScrollToSection from "@/components/scroll-to-section"
 import SectionTransition from "@/components/section-transition"
@@ -9,6 +9,8 @@ import BackgroundImage from "@/components/layout/background-image"
 import DownloadCVButton from "@/components/buttons/download-cv-button"
 import Image from "next/image"
 import SkillBar from "@/components/skills/skill-bar"
+import { motion } from "motion/react"
+import { ContainerScroll } from "@/components/ui/container-scroll-animation"
 
 // Import the lazy components
 import { LazyContactForm, LazyLoadComponent } from "@/components/lazy-components"
@@ -32,6 +34,9 @@ const ProjectsSection = dynamic(() => import("@/components/projects-section"), {
 })
 
 export default function Home() {
+  const [isLoaded, setIsLoaded] = useState(false)
+  useEffect(() => { setIsLoaded(true) }, [])
+
   return (
     <div className="min-h-screen overflow-x-hidden">
       {/* Fixed background image */}
@@ -44,48 +49,150 @@ export default function Home() {
       {/* Content that scrolls over the background */}
       <main id="main-content" className="pt-20 relative z-10">
         {/* Hero Section */}
-        <section className="py-12 md:py-20 relative" aria-labelledby="hero-heading">
-          <div className="container mx-auto px-4 relative z-10 pt-8 md:pt-0">
-            <div className="flex flex-col md:flex-row items-center gap-10">
-              <div className="md:w-1/3 flex justify-center">
-                <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white shadow-xl">
-                  <Image
-                    src={SITE_CONFIG.images.profile || "/placeholder.svg"}
-                    alt={`${SITE_CONFIG.name}, ${SITE_CONFIG.title}, professional headshot`}
-                    fill
-                    className="object-cover"
-                    priority={true}
-                    quality={85}
-                    placeholder="blur"
-                    blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmOGY5ZmEiLz48L3N2Zz4="
-                    sizes="(max-width: 768px) 192px, 256px"
-                  />
+        <section className="relative overflow-hidden" aria-labelledby="hero-heading">
+          {/* Animated gradient blobs */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isLoaded ? { opacity: 0.25, scale: 1 } : {}}
+            transition={{ duration: 1.8, ease: "easeOut" }}
+            className="absolute top-10 right-10 w-72 h-72 rounded-full bg-primary/40 blur-[100px] pointer-events-none"
+            aria-hidden="true"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isLoaded ? { opacity: 0.2, scale: 1 } : {}}
+            transition={{ duration: 2, delay: 0.3, ease: "easeOut" }}
+            className="absolute bottom-10 left-10 w-80 h-80 rounded-full bg-teal-400/30 blur-[120px] pointer-events-none"
+            aria-hidden="true"
+          />
+
+          <ContainerScroll
+            titleComponent={
+              <div className="container mx-auto px-4">
+                <div className="flex flex-col md:flex-row items-center gap-10 mb-8">
+                  {/* Profile Image */}
+                  <motion.div
+                    className="md:w-1/3 flex justify-center"
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ duration: 0.7, ease: "easeOut" }}
+                  >
+                    <div className="relative">
+                      <div className="absolute -inset-1.5 rounded-full bg-gradient-to-br from-primary via-blue-400 to-teal-400 blur-sm opacity-70 animate-gradient" aria-hidden="true" />
+                      <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white shadow-2xl">
+                        <Image
+                          src={SITE_CONFIG.images.profile || "/placeholder.svg"}
+                          alt={`${SITE_CONFIG.name}, ${SITE_CONFIG.title}, professional headshot`}
+                          fill
+                          className="object-cover"
+                          priority={true}
+                          quality={85}
+                          placeholder="blur"
+                          blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmOGY5ZmEiLz48L3N2Zz4="
+                          sizes="(max-width: 768px) 192px, 256px"
+                        />
+                      </div>
+                      {/* Availability badge */}
+                      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1 bg-white rounded-full shadow-lg border border-slate-100 whitespace-nowrap">
+                        <span className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+                        </span>
+                        <span className="text-xs font-medium text-slate-700">Available for opportunities</span>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Text Content */}
+                  <div className="md:w-2/3 text-center md:text-left">
+                    {/* Tech stack badges */}
+                    <motion.div
+                      className="flex flex-wrap gap-2 justify-center md:justify-start mb-5"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+                    >
+                      {[
+                        { icon: Database, label: "SQL & ETL" },
+                        { icon: BarChart3, label: "Power BI" },
+                        { icon: Code2, label: "Data Engineering" },
+                      ].map(({ icon: Icon, label }) => (
+                        <span key={label} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium border border-primary/20">
+                          <Icon size={12} aria-hidden="true" />
+                          {label}
+                        </span>
+                      ))}
+                    </motion.div>
+
+                    <motion.h1
+                      id="hero-heading"
+                      className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-3"
+                      initial={{ opacity: 0, y: 25 }}
+                      animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
+                    >
+                      {SITE_CONFIG.name}
+                    </motion.h1>
+
+                    <motion.h2
+                      className="text-xl md:text-2xl lg:text-3xl font-medium text-primary mb-5"
+                      initial={{ opacity: 0, y: 25 }}
+                      animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.6, delay: 0.35, ease: "easeOut" }}
+                    >
+                      {SITE_CONFIG.title}
+                    </motion.h2>
+
+                    <motion.p
+                      className="text-base md:text-lg text-slate-700 mb-8 max-w-2xl mx-auto md:mx-0 leading-relaxed"
+                      initial={{ opacity: 0, y: 25 }}
+                      animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.6, delay: 0.45, ease: "easeOut" }}
+                    >
+                      Dedicated and meticulous professional with experience across diverse fields such as customer service,
+                      collecting requirements based on the client's specifications and deliver solutions. Technology
+                      enthusiast in a continuous improvement development path.
+                    </motion.p>
+
+                    <motion.div
+                      className="flex flex-wrap gap-4 justify-center md:justify-start mb-6"
+                      initial={{ opacity: 0, y: 25 }}
+                      animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.6, delay: 0.55, ease: "easeOut" }}
+                    >
+                      <Button variant="default" className="bg-primary hover:bg-primary/90 group" asChild>
+                        <a href="#contact" className="inline-flex items-center gap-2">
+                          Contact Me
+                          <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                        </a>
+                      </Button>
+                      <Button variant="outline" className="border-primary text-primary hover:bg-primary/10" asChild>
+                        <a href="#experience">View Experience</a>
+                      </Button>
+                    </motion.div>
+
+                    <motion.div
+                      className="flex justify-center md:justify-start"
+                      initial={{ opacity: 0, y: 25 }}
+                      animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.6, delay: 0.65, ease: "easeOut" }}
+                    >
+                      <DownloadCVButton />
+                    </motion.div>
+                  </div>
                 </div>
               </div>
-              <div className="md:w-2/3 text-center md:text-left">
-                <h1 id="hero-heading" className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
-                  {SITE_CONFIG.name}
-                </h1>
-                <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-primary mb-6">{SITE_CONFIG.title}</h2>
-                <p className="text-base md:text-lg text-slate-800 mb-8 max-w-2xl mx-auto md:mx-0">
-                  Dedicated and meticulous professional with experience across diverse fields such as customer service,
-                  collecting requirements based on the client's specifications and deliver solutions. Technology
-                  enthusiast in a continuous improvement development path.
-                </p>
-                <div className="flex flex-wrap gap-4 justify-center md:justify-start mb-6">
-                  <Button variant="default" className="bg-primary hover:bg-primary/90" asChild>
-                    <a href="#contact">Contact Me</a>
-                  </Button>
-                  <Button variant="outline" className="border-primary text-primary hover:bg-primary/10" asChild>
-                    <a href="#experience">View Experience</a>
-                  </Button>
-                </div>
-                <div className="flex justify-center md:justify-start">
-                  <DownloadCVButton />
-                </div>
-              </div>
-            </div>
-          </div>
+            }
+          >
+            <Image
+              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"
+              alt="Data analytics dashboard showing charts and metrics"
+              height={720}
+              width={1400}
+              className="mx-auto rounded-2xl object-cover h-full object-top"
+              draggable={false}
+            />
+          </ContainerScroll>
         </section>
 
         {/* About Section */}
