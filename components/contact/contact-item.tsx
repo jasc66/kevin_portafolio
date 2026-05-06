@@ -15,7 +15,7 @@ export function ContactItem({ icon: Icon, label, value, href, isExternal }: Cont
         <Icon size={18} className="text-primary" aria-hidden="true" />
       </div>
       <div className="min-w-0 flex-1">
-        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-0.5">{label}</p>
+        <p className="text-xs font-semibold text-slate-600 uppercase tracking-wider mb-0.5">{label}</p>
         {href ? (
           <a
             href={href}

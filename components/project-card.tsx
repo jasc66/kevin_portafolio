@@ -39,7 +39,7 @@ const ProjectCard = memo(function ProjectCard({
       initial={{ opacity: 0, y: 30 }}
       animate={isVisible ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="card shadow-lg h-[400px] w-full group rounded-xl relative flex justify-end flex-col p-6 z-[1] overflow-hidden bg-slate-900"
+      className="card shadow-lg min-h-[400px] w-full group rounded-xl relative flex justify-end flex-col p-6 z-[1] overflow-hidden bg-slate-900"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -65,7 +65,7 @@ const ProjectCard = memo(function ProjectCard({
 
         {/* Rating */}
         <div className="flex items-center gap-2">
-          <div className="flex gap-0.5" aria-label={`Rating: ${rating} out of 5 stars`}>{stars}</div>
+          <div className="flex gap-0.5" role="img" aria-label={`Rating: ${rating} out of 5 stars`}>{stars}</div>
           <span className="text-xs text-white/60">{rating}/5</span>
         </div>
 

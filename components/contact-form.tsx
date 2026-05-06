@@ -46,7 +46,7 @@ export default function ContactForm() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name */}
           <div>
-            <label htmlFor="name" className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
+            <label htmlFor="name" className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
               Name
             </label>
             <div className="relative">
@@ -69,7 +69,7 @@ export default function ContactForm() {
 
           {/* Email */}
           <div>
-            <label htmlFor="email" className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
+            <label htmlFor="email" className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
               Email
             </label>
             <div className="relative">
@@ -92,7 +92,7 @@ export default function ContactForm() {
 
           {/* Subject */}
           <div>
-            <label htmlFor="subject" className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
+            <label htmlFor="subject" className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
               Subject
             </label>
             <div className="relative">
@@ -115,7 +115,7 @@ export default function ContactForm() {
 
           {/* Message */}
           <div>
-            <label htmlFor="message" className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
+            <label htmlFor="message" className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
               Message
             </label>
             <div className="relative">

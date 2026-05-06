@@ -63,7 +63,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`scroll-smooth ${inter.variable}`}>
+    <html lang="en" className={`scroll-smooth scroll-pt-20 ${inter.variable}`}>
       <head>{/* Eliminamos el preload que estaba causando la advertencia */}</head>
       <body className={inter.className}>
         {/* Skip to content link for accessibility */}
